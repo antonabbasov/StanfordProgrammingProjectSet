@@ -26,7 +26,7 @@ extension Int {
     /// Circular increment
     /// - Parameter number: Number in which increment
     /// - Returns: Return to the first position once the end of the array is reached, or self
-    func incrementCircle (in number: Int) -> Int {
+    func incrementCircle(in number: Int) -> Int {
         return (number - 1) > self ? self + 1 : 0
     }
 }

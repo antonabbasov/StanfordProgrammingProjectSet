@@ -43,7 +43,7 @@ import UIKit
     private func setAttributedString(card: Card) -> NSAttributedString {
         let symbol = symbols[card.shapeOfSymbol.shape]
         let separator = verticalSizeClass == .regular ? "\n" : " "
-        let symbolsString = symbol.join(n: card.amountOfSymblos.rawValue, with: separator)
+        let symbolsString = symbol.join(amount: card.amountOfSymblos.rawValue, with: separator)
         let attributes:[NSAttributedString.Key : Any] = [
             .strokeColor: colors[card.colorOfSymbols.shape],
             .strokeWidth: strokeWidths[card.fillOfSymbol.shape],

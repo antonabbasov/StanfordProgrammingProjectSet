@@ -25,12 +25,14 @@ struct Card {
         
         typealias RawValue = Int
         
-        static var all: [Variant] {return [.v1,.v2,.v3]}
+        static var all: [Variant] {
+            return [.v1,.v2,.v3]
+        }
         var description: String {return String(self.rawValue)}
         var shape: Int {return (self.rawValue - 1)}
     }
     
-    // MARK: - Instance methods
+    // MARK: - Instance Methods
     
     /// Method responsible for detection "set" from three given cards
     /// - Parameter cards: Three selected cards
@@ -44,6 +46,7 @@ struct Card {
             cards.reduce(0, {$0 + $1.shapeOfSymbol.rawValue}),
             cards.reduce(0, {$0 + $1.fillOfSymbol.rawValue})
         ]
+        
         return sum.reduce(true, { $0 && ($1 % 3 == 0)})
     }
 }

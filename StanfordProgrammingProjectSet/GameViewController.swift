@@ -11,13 +11,13 @@ class GameViewController: UIViewController {
     
     // MARK: - Outlets
     
-    @IBOutlet weak var hintButton: ButtonBorder!
-    @IBOutlet weak var dealPlusThreeCardsButton: ButtonBorder!
-    @IBOutlet weak var newGameButton: ButtonBorder!
+    @IBOutlet private weak var hintButton: ButtonBorder!
+    @IBOutlet private weak var dealPlusThreeCardsButton: ButtonBorder!
+    @IBOutlet private weak var newGameButton: ButtonBorder!
     
-    @IBOutlet weak var deckCountLabel: UILabel!
-    @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet private weak var deckCountLabel: UILabel!
+    @IBOutlet private weak var messageLabel: UILabel!
+    @IBOutlet private weak var scoreLabel: UILabel!
     
     @IBOutlet var cardButtons: [CardButton]! {
         didSet {
@@ -60,6 +60,7 @@ class GameViewController: UIViewController {
     @IBAction func hintButton(_ sender: ButtonBorder) {
         timer?.invalidate()
         if  game.hints.count > 0 {
+            
             game.hints[lastHint].forEach {
                 (hintedButtonIndex) in let button = self.cardButtons[hintedButtonIndex]
                 button.setBorderColor(color: Colors.hint)
@@ -67,7 +68,7 @@ class GameViewController: UIViewController {
             
             messageLabel.text = "Set \(lastHint + 1) Wait..."
             timer = Timer.scheduledTimer(withTimeInterval: Constants.flashTime, repeats: false) {
-                [weak self] time in self?.game.hints[(self?.lastHint)!].forEach {
+                [weak self] time in self?.game.hints[(self?.lastHint) ?? 0].forEach {
                     (hintedButtonIndex) in let button = self?.cardButtons[hintedButtonIndex]
                     button!.setBorderColor(color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
                 }
@@ -151,11 +152,11 @@ extension GameViewController {
     
     // MARK: - Instance Constants
     
-    private struct Colors {
+    private enum Colors {
         static let hint: UIColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
         static let selected: UIColor = #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1)
         static let matched: UIColor = #colorLiteral(red: 0, green: 0.9914394021, blue: 1, alpha: 1)
-        static var misMatched: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        static let misMatched: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     }
     
     private struct Constants {

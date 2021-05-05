@@ -36,6 +36,7 @@ struct SetGame {
             guard tryMatchedCards.count == 3 else { return nil }
             return Card.isSet(cards: tryMatchedCards)
         }
+        
         set {
             if newValue != nil {
                 if newValue! {
@@ -44,6 +45,7 @@ struct SetGame {
                 } else {
                     score -= Points.missMatchPenalty
                 }
+                
                 tryMatchedCards = selectedCards
                 selectedCards.removeAll()
             } else {
@@ -56,6 +58,7 @@ struct SetGame {
     var hints: [[Int]] {
         var hints = [[Int]]()
         if cardsOnTable.count > 2 {
+            
             for i in 0..<cardsOnTable.count {
                 for j in (i+1)..<cardsOnTable.count {
                     for k in (j+1)..<cardsOnTable.count {
@@ -74,17 +77,19 @@ struct SetGame {
                 .filter{$0.intersection(Set(matchIndices)).isEmpty}
                 .map{Array($0)}
         }
+        
         return hints
     }
     
     var deckCount: Int { return deck.cards.count }
     
-    // MARK: - Instance methods
+    // MARK: - Instance Methods
     
     /// Get additional three cards
     /// - Returns: Recieved cards
     private mutating func additionalThreeCards() -> [Card]? {
         var threeCards = [Card]()
+        
         for _ in 0...2 {
             if let card = deck.draw() {
                 threeCards += [card]
@@ -123,7 +128,7 @@ struct SetGame {
         let choosenCard = cardsOnTable[index]
         
         if !removedCards.contains(choosenCard) && !tryMatchedCards.contains(choosenCard) {
-            if  isSet != nil {
+            if isSet != nil {
                 if isSet! { replaceOrRemoveThreeCards() }
                 isSet = nil
             }

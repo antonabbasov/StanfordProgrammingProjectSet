@@ -11,15 +11,17 @@ extension String {
     
     /// Concatenates string
     /// - Parameters:
-    ///   - n: Amount of symbols
+    ///   - amount: Amount of symbols
     ///   - separator: Separator
     /// - Returns: Joined string
-    func join(n: Int, with separator: String ) -> String {
-        guard n > 1 else { return self }
+    func join(amount: Int, with separator: String ) -> String {
+        guard amount > 1 else { return self }
         var symbols = [String]()
-        for _ in 0..<n {
+        
+        for _ in 0..<amount {
             symbols += [self]
         }
+        
         return symbols.joined(separator: separator)
     }
 }
